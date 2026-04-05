@@ -34,14 +34,15 @@ public class JdbcStudentRepository implements StudentRepository {
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
 
-            if (rs.next()) {
-                return new Student(
-                        rs.getInt("id"),
-                        rs.getString("name"),
-                        rs.getDouble("gpa")
-                );
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return new Student(
+                            rs.getInt("id"),
+                            rs.getString("name"),
+                            rs.getDouble("gpa")
+                    );
+                }
             }
 
         } catch (SQLException e) {

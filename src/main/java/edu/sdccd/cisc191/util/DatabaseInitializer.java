@@ -17,10 +17,10 @@ public class DatabaseInitializer {
             // RECREATE TABLES
             stmt.execute("""
                 CREATE TABLE students (
-                    id INT PRIMARY KEY,
-                    name VARCHAR(100),
-                    gpa DOUBLE
-                )
+                            id INT PRIMARY KEY,
+                            name VARCHAR(100) NOT NULL,
+                            gpa DOUBLE NOT NULL
+                        )
             """);
 
             stmt.execute("""
