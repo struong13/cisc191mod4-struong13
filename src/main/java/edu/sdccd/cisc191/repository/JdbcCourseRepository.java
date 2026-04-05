@@ -33,14 +33,14 @@ public class JdbcCourseRepository implements CourseRepository {
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, studentId);
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                list.add(new Course(
-                        rs.getInt("id"),
-                        rs.getString("title"),
-                        rs.getInt("student_id")
-                ));
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    list.add(new Course(
+                            rs.getInt("id"),
+                            rs.getString("title"),
+                            rs.getInt("student_id")
+                    ));
+                }
             }
 
         } catch (SQLException e) {
