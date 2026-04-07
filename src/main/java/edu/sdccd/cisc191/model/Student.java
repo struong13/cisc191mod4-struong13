@@ -40,7 +40,7 @@ public class Student {
     }
 
     public void setGpa(double gpa) {
-        if (gpa < 0) {
+        if (gpa < 0.0 || gpa > 4.0) {
             throw new IllegalArgumentException("Student GPA is invalid.");
         }
         this.gpa = gpa;
